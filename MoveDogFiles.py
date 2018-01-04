@@ -9,6 +9,11 @@ for i in breeds:
     directory = './train/train/' + i
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+for i in breeds:
+    directory = './train/test/' + i
+    if not os.path.exists(directory):
+        os.makedirs(directory)
         
 # Move pictures into corresponding breed folders 
 for index, row in files.iterrows():
@@ -30,9 +35,18 @@ print min(image_counts)
 
 # Delete images more than 66 for each breed
 for folder in folders:
-    count = 0
+    count = 1
     for file in os.listdir(os.path.join(path,folder)):
-        print file
-        print os.path.join(path,folder,file)
+        if count > 66:
+            os.remove(os.path.join(path,folder,file))
         count += 1
-        print count
+
+# Move 10 images into another folder for testing for each breed
+for folder in folders:
+    count = 1
+    for file in os.listdir(os.path.join(path,folder)):
+        if count > 56:
+            print os.path.join(path,folder,file)
+            print os.path.join('./train/test/',folder,file)
+            os.rename(os.path.join(path,folder,file), os.path.join('./train/test/',folder,file))
+        count += 1
