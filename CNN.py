@@ -56,7 +56,7 @@ test_set = test_datagen.flow_from_directory('train/test',
                                             class_mode = 'categorical')
 
 classifier.fit_generator(training_set,
-                         epochs = 100,
+                         epochs = 300,
                          validation_data = test_set)
 
 from keras.preprocessing import image as image_utils
