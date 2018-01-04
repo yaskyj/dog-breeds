@@ -11,7 +11,7 @@ from keras.layers import Dense
 classifier = Sequential()
 
 # Convolution
-classifier.add(Conv2D(32, (3, 3), input_shape = (64, 64, 3), activation = 'relu'))
+classifier.add(Conv2D(32, (3, 3), input_shape = (128, 128, 3), activation = 'relu'))
 
 # Pooling
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
@@ -46,18 +46,27 @@ train_datagen = ImageDataGenerator(
 test_datagen = ImageDataGenerator(rescale = 1./255)
 
 training_set = train_datagen.flow_from_directory('train/train',
-                                                 target_size = (64, 64),
+                                                 target_size = (128, 128),
                                                  batch_size = 32,
                                                  class_mode = 'categorical')
 
 test_set = test_datagen.flow_from_directory('train/test',
-                                            target_size = (64, 64),
+                                            target_size = (128, 128),
                                             batch_size = 32,
                                             class_mode = 'categorical')
 
 classifier.fit_generator(training_set,
                          epochs = 300,
                          validation_data = test_set)
+
+classifier.
+import os
+script_dir = os.getcwd()
+
+# Save model
+model_backup_path = os.path.join(script_dir, 'cnn-64.h5')
+classifier.save(model_backup_path)
+print("Model saved to", model_backup_path)
 
 from keras.preprocessing import image as image_utils
 import numpy as np
