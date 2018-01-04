@@ -37,7 +37,7 @@ print min(image_counts)
 for folder in folders:
     count = 1
     for file in os.listdir(os.path.join(path,folder)):
-        if count > 66:
+        if count < 66:
             os.remove(os.path.join(path,folder,file))
         count += 1
 
@@ -45,7 +45,7 @@ for folder in folders:
 for folder in folders:
     count = 1
     for file in os.listdir(os.path.join(path,folder)):
-        if count > 56:
+        if count < 11:
             print os.path.join(path,folder,file)
             print os.path.join('./train/test/',folder,file)
             os.rename(os.path.join(path,folder,file), os.path.join('./train/test/',folder,file))
