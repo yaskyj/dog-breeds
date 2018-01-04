@@ -25,7 +25,7 @@ classifier.add(Flatten())
 
 # Full connection
 classifier.add(Dense(units = 128, activation = 'relu'))
-classifier.add(Dense(units = 1, activation = 'sigmoid'))
+classifier.add(Dense(units = 120, activation = 'softmax'))
 
 # Compiling the CNN
 classifier.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
@@ -56,10 +56,8 @@ test_set = test_datagen.flow_from_directory('train/test',
                                             class_mode = 'categorical')
 
 classifier.fit_generator(training_set,
-                         samples_per_epoch = 56,
-                         nb_epoch = 25,
-                         validation_data = test_set,
-                         nb_val_samples = 10)
+                         epochs = 100,
+                         validation_data = test_set)
 
 from keras.preprocessing import image as image_utils
 import numpy as np
